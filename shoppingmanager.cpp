@@ -1,5 +1,7 @@
 #include "shoppingmanager.h"
 #include "ui_shoppingmanager.h"
+#include "clientmanager.h"
+#include "productmanager.h"
 
 #include <QInputDialog>
 

@@ -2,17 +2,35 @@
 #include "ui_clientmanager.h"
 #include "client.h"
 #include <QErrorMessage>
+#include <QFile>
 
 ClientManager::ClientManager(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ClientManager)
 {
     ui->setupUi(this);
+
+
 }
 
 ClientManager::~ClientManager()
 {
     delete ui;
+
+    QFile file("clientlist.txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QTextStream out(&file);
+    for (const auto& v : clientList) {
+        Client* c = v;
+        out << c->userCount() << ", " << c->getUserID() << ", ";
+        out << c->getName() << ", ";
+        out << c->getPhoneNumber() << ", ";
+        out << c->getAddress() << ", ";
+        out << c->get_Gender() << "\n";
+    }
+    file.close( );
 }
 
 int ClientManager::userCount() {
@@ -64,10 +82,10 @@ void ClientManager::on_pushButton_clicked()
         address = ui->lineEdit_4->text();
         gender = ui->comboBox->currentText();
 
-//        if(userId.length()) {
-//            Client *c = new Client(ucnt, userId, name, call, address, gender);
-//            clientList.insert(ucnt, c);
-//        }
+        if(userId.length()) {
+            Client *c = new Client(ucnt, userId, name, call, address, gender);
+            clientList.insert(ucnt, c);
+        }
         qDebug() << "회원 수: " << ucnt;
         qDebug() << "아이디: " << userId;
         qDebug() << "이름: " << name;
