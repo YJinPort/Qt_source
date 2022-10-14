@@ -31,21 +31,21 @@ ProductManager::ProductManager(QWidget *parent) :
     file.close();
 
     //해결해야함
-    QFile file2("clientlist.txt");
-    if (!file2.open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
+//    QFile file2("clientlist.txt");
+//    if (!file2.open(QIODevice::ReadOnly | QIODevice::Text))
+//        return;
 
-    QTextStream in2(&file2);
-    while (!in2.atEnd()) {
-        QString line = in2.readLine();
-        QList<QString> row = line.split(", ");
-        if(row.size()) {
-            int count = row[0].toInt();
-            Client* c = new Client(count, row[1], row[2], row[3], row[4], row[5]);
-            ui->treeWidget_2->addTopLevelItem(c);
-        }
-    }
-    file2.close( );
+//    QTextStream in2(&file2);
+//    while (!in2.atEnd()) {
+//        QString line = in2.readLine();
+//        QList<QString> row = line.split(", ");
+//        if(row.size()) {
+//            int count = row[0].toInt();
+//            Client* c = new Client(count, row[1], row[2], row[3], row[4], row[5]);
+//            ui->treeWidget_2->addTopLevelItem(c);
+//        }
+//    }
+//    file2.close( );
 }
 
 ProductManager::~ProductManager()
